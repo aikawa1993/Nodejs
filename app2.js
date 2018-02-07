@@ -1,8 +1,8 @@
 var Sequelize = require('sequelize');
 var userName = 'sa';
-var password = '123456'; // update me
+var password = 'Quocviet@1993';
 var hostName = 'localhost';
-var sampleDbName = 'CellPhone';
+var sampleDbName = 'DataNodejs';
 
 // Initialize Sequelize to connect to sample DB
 var sampleDb = new Sequelize(sampleDbName, userName, password, {
@@ -15,6 +15,23 @@ var sampleDb = new Sequelize(sampleDbName, userName, password, {
         requestTimeout: 30000 // timeout = 30 seconds
     }
 });
+
+// const sequelize = new Sequelize(sampleDbName, userName, password, {
+//   host: 'VIET\\MSSQLSERVER11',
+//   dialect: 'mssql',
+
+//   define: {
+//     freezeTableName: true
+//   },
+//   pool: {
+//     max: 5,
+//     min: 0,
+//     acquire: 30000,
+//     idle: 10000
+//   },
+  // http://docs.sequelizejs.com/manual/tutorial/querying.html#operators
+//   operatorsAliases: false
+// });
 
 // Define the 'User' model
 var User = sampleDb.define('user', {
