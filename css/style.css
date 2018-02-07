@@ -1,0 +1,223 @@
+/*Thiet ke trang HTML*/
+html, body {
+    height: 100%;
+    width: 100%;
+}
+
+/* Hero background */
+#hero {
+    background: url('/hinh/night-sky.jpg');
+    background-size: cover;
+    background-position: center bottom;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 40px;
+    font-weight: 700;
+    margin-top: -70px;
+    z-index: -50;
+}
+#hero > h1 {
+    color: #fff;
+    margin-top: -60px;
+}
+#btnLearn{
+    font-size: 17px;
+    font-weight: 500;
+}
+#iconRow {
+    padding: 60px 0;
+}
+/* Navigation Menu */
+.custom-nav {
+    background: transparent;
+    min-height: 70px;
+    width: 100%;
+    z-index: 999999999;
+}
+.custom-nav #logo  {
+    margin-top: 10px;
+}
+.custom-nav #logo > a {
+    color: #fff;
+    padding: 15px 0 0 25px;
+    font-size: 24px;
+    text-decoration: none;
+}
+.custom-nav #links,#logo {
+    display: inline-block;
+}
+.custom-nav #links > a {
+    display: inline-block;
+    color: #fff;
+    padding-right: 15px;
+    text-decoration: none;
+}
+.custom-nav #links{
+    list-style: none;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 20px 35px 0 0;
+}
+.text-center{
+    text-align: center;
+}
+/* Imgage body */
+#pics > #pic1, #pic2 {
+    display: inline-block;
+    float:left;
+    width: 50%;
+}
+#pics > #pic1 { 
+    background: url(/hinh/preview.jpg);
+    background-size: cover;
+    background-position: center bottom;
+    height: 450px;
+}
+#pics > #pic2 { 
+    background: url(/hinh/hinh_nen.jpg);
+    background-size: cover;
+    background-position: center bottom;
+    height: 450px;
+}
+ul {
+    list-style: none;
+}
+#pics .overlay{
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;   
+}
+/* Footer */
+#footer {
+    background: black;
+    padding: 30px;
+    color: #fff;
+}
+#imgFb ,#imgUtube, #imgIns {
+    padding-right: 15px;
+}
+#second_div {
+    text-align: center;
+}
+#first_div {
+    text-align: center;
+}
+/* color icon */
+#footer #imgFb:hover  { 
+    color: #fff; 
+    font-size: 18px;
+}
+#footer #imgUtube:hover  { 
+    color: red; 
+    font-size: 18px;
+}
+#footer #imgIns:hover  { 
+    color: yellow; 
+    font-size: 18px;
+}
+
+#footer .btn-top:hover  { 
+    color: blueviolet; 
+    font-size: 18px;
+}
+/* Thay đổi header khi scroll xuống */
+.shrink {
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 60px;
+    padding-top: 0px;
+  }
+
+/* @media */
+@media screen and (max-width: 480px) {
+/* Hero background */
+    #hero {
+    font-size: 17px;
+    }
+
+    #btnLearn{
+    font-size: 10px;
+    margin-top : 7px;
+    }
+
+    .custom-nav #logo > a {
+        font-size: 18px;
+    }
+
+    .custom-nav #links{
+        font-size: 10px;
+        padding: 20px 5px 0 0;
+    }
+
+    .custom-nav #links > li {
+        padding-right: 15px;
+    }
+    #iconRow{
+        padding: 20px 20px 0px 20px;
+    }
+    #iconRow >.col-md-4> h2{
+        margin-bottom: 30px;
+        font-size: 20px;
+    }
+
+    #iconRow >.col-md-4 >.fa{
+        font-size: 3em;
+    }
+    /* Footer */
+    #footer {
+        background: black;
+        padding: 5px;
+        color: #fff;
+    }
+    #iconFooter{
+        position:relative;
+    }
+    .flipit {
+        position: relative;
+    }
+    .flipit #first_div {
+        position: absolute;
+        top: 60%;
+        width: 100%;
+    }
+    #second_div {
+        padding-bottom: 20px;
+        text-align: center;
+    }
+    #imgFb ,#imgUtube, #imgIns {
+        padding-right: 15px;
+    }
+
+    #first_div {
+        text-align: center;
+    }
+}
+.btn-top{
+    background-repeat: no-repeat;
+    border: medium none;
+    bottom: 20px;
+    cursor: pointer;
+    display: none;
+    height: 50px;
+    outline: medium none;
+    padding: 0;
+    position: fixed;
+    right: 20px;
+    width: 50px;
+    z-index: 999999999999;
+}
+
+
+
