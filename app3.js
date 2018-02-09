@@ -41,39 +41,42 @@ sequelize
   // });
 
 // create 
-sequelize.sync()
-  .then(() => User.create({
-    Firstname: 'Việt',
-    Lastname: "Trần",
-  }))
-  .then(jane => {
-    console.log(jane.toJSON());
-  });
+// sequelize.sync()
+//   .then(() => User.create({
+//     Firstname: 'Việt',
+//     Lastname: "Trần",
+//   }))
+//   .then(user => {
+//     console.log(user.toJSON());
+//   });
+
+// read
 // User.findAll({
-//     where: { firstName: 'viet'}
+//     where: { Firstname: 'Việt'}
 // }).then(users => {
 //     console.log(users)
 // })
 
 // update 
-// Task.findById(1)
-// .then(function(task) {
+// User.findById(1)
+// .then(function(user) {
 //   console.log('\nUpdating task:',
-// task.title + ' ' + task.dueDate);
-//   task.update({
-//       dueDate: "29/01/2018"
+//   user.Firstname + ' ' + user.Lastname);
+//   user.update({
+//     Firstname: "Trâm",
+//     Lastname: 'Phạm'
 //   })
 // })
 
 // remove
-// Task.destroy({
-//   where: { dueDate: {$lte: new Date(2016,12,31)}}
-// })
-// .then(function() {
-//   Task.findAll()
-//   .then(function(tasks) {
-//       console.log('Tasks in database after delete:',
-// JSON.stringify(tasks));
-//       console.log('\nAll done!');
-//   })
-// })
+User.destroy({
+  where: { id: {$lte: 1}}
+})
+.then(function() {
+  User.findAll()
+  .then(function(User) {
+      console.log('User in database after delete:',
+JSON.stringify(User));
+      console.log('\nAll done!');
+  })
+})

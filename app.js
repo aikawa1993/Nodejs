@@ -6,7 +6,7 @@ var homeController = require("./controller/homeController");
 var app = express();
 app.use(cookieParser());
 var port = 3000;
-app.use(session({secret: 'ssshhhhh'}));
+// app.use(session({secret: 'ssshhhhh'}));
 app.set("view engine", "ejs");
 var sess;
 

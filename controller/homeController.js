@@ -6,7 +6,6 @@ var sess;
 var jsonParser = bodyParser.json()
 // create application/x-www-form-urlencoded parser
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
-app.use(session({secret: 'ssshhhhh'}));
 module.exports = function (app) {
     app.use("/", function(req, res, next){
         console.log("Request URL:", req.url);
