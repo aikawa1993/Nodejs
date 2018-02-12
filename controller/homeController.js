@@ -1,11 +1,12 @@
 var cookieParser = require("cookie-parser");
 var bodyParser = require("body-parser");
 var session = require("express-session");
-var sess;
+
 // create application/json parser
 var jsonParser = bodyParser.json()
 // create application/x-www-form-urlencoded parser
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
+
 module.exports = function (app) {
     app.use("/", function(req, res, next){
         console.log("Request URL:", req.url);
@@ -24,6 +25,10 @@ module.exports = function (app) {
         res.render("info");
     });
 
+    app.get("/user",function(req, res){
+        res.render("user");
+    });
+
     app.get("/login",function(req, res){
         res.render("login");
     })
@@ -39,28 +44,27 @@ module.exports = function (app) {
         res.render("user", { ID: sess.username });
     });
     // Post Method
+    
     app.post("/login", urlencodedParser,function(req, res){
         // res.send("Welcome," + req.body.username);
         console.log(req.body.lg_username);
         console.log(req.body.lg_password);
         if(req.body.lg_username == "viet" && req.body.lg_password == "123")  { 
-            sess = req.session;
+            // sess = req.session;
             // Save session username
-            sess.username = req.body.lg_username;
+            // sess.username = req.body.lg_username;
             //res.end('done');    
-            return res.redirect("/user");        
+            return res.redirect('/user');
         }
         else {
             return res.redirect('/login');
         }
-       
     });
 
     app.post("/loginjson", jsonParser, function(req, res){
         // page success after login
         console.log(req.body.username);
         console.log(req.body.password);
-        return res.redirect("/user");      
+        // return res.redirect("/user");      
     });
-
 }

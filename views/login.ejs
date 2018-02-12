@@ -189,7 +189,7 @@
                                             <label for="lg_remember">remember</label>
                                         </div>
                                     </div>
-                                    <button type="login" id="btnLogin" class="login-button"><i class="fa fa-chevron-right"></i></button>
+                                    <button type="submit" id="btnLogin" class="login-button"><i class="fa fa-chevron-right"></i></button>
                                 </div>
                                 <div class="etc-login-form">
                                     <p>forgot your password? <a href="#">click here</a></p>
@@ -204,18 +204,18 @@
 </html>
 <script>
  $(document).ready(function () {
-    $("#btnLogin").click(function(){
-        var Data = {
-            username: $("#username").val(),
-            password: $("#password").val()
-        };
-        $.ajax({
-            type: "POST",
-            url: "/loginjson",
-            data: JSON.stringify(Data),
-            dataType: "json",
-            contentType: "application/json"
-        });
-    });
+    // $("#btnLogin").click(function(){
+    //     var Data = {
+    //         username: $("#username").val(),
+    //         password: $("#password").val()
+    //     };
+    //     $.ajax({
+    //         type: "POST",
+    //         url: "/loginjson",
+    //         data: JSON.stringify(Data),
+    //         dataType: "json",
+    //         contentType: "application/json"
+    //     });
+    // });
   });
 </script>
