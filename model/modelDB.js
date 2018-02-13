@@ -1,4 +1,4 @@
-var database = require('/WebNodejs-master/lib/dbconn');
+var database = require('/WebNodejs/lib/dbconn');
 var Sequelize = require('sequelize');
 
 var User = database.define('user', {

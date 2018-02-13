@@ -1,4 +1,50 @@
-module.exports = function(app, passport) {
+var LocalStrategy = require('passport-local').Strategy;
+var Model = require('./model/modelDB');
+module.exports = function(app, passport, connection) {
+     // =========================================================================
+    // passport session setup ==================================================
+    // =========================================================================
+    // required for persistent login sessions
+    // passport needs ability to serialize and unserialize users out of session
+
+    // used to serialize the user for the session
+    passport.serializeUser(function(username, done) {
+        done(null, username.userId);
+    });
+
+    // used to deserialize the user
+    passport.deserializeUser(function(userId, done) {
+
+        request.query("select * from Users where Id='" + userId + "'",function(err,rows){
+                console.log('Query Success');
+                done(err, rows[0]);
+        });
+    });
+
+    passport.use('local-login', new LocalStrategy({
+            // by default, local strategy uses username and password, we will override with email
+            usernameField : 'Username',
+            passwordField : 'Password',
+            passReqToCallback : true // allows us to pass back the entire request to the callback
+        },
+        function(req, username, password, done) { // callback with email and password from our form
+                request.query("select * from Users where Username='" + Model.User({username: username}) +  "'",function(err,rows){
+                    if (err)
+                    return done(err);
+                if (!rows.length) {
+                    return done(null, false, req.flash('loginMessage', 'No user found.')); // req.flash is the way to set flashdata using connect-flash
+                }
+
+                // if the user is found but the password is wrong
+                if (!( rows[0].password == password))
+                    return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.')); // create the loginMessage and save it to session as flashdata
+
+                // all is well, return successful user
+                return done(null, rows[0]);
+                console.log('loged');
+            });
+        }));
+    // used to serialize the user for the session
     // =====================================
     // HOME PAGE (with login links) ========
     // =====================================
@@ -16,7 +62,7 @@ module.exports = function(app, passport) {
     });
 
     // process the login form
-    app.post('/login', passport.isAuthenticated('local-login', {
+    app.post('/login', passport.authenticate('local-login', {
             successRedirect : '/user', // redirect to the secure profile section
             failureRedirect : '/login', // redirect back to the signup page if there is an error
             failureFlash : true // allow flash messages

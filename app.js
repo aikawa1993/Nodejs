@@ -40,7 +40,7 @@ app.set("view engine","ejs");
   
 // apiController(app);
 // homeController(app);
-require('./routes.js')(app, passport);
+require('./routes.js')(app, passport, connection);
 
 app.listen(port, function(){
     console.log("Sever is listening on PORT", port);
