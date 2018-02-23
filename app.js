@@ -9,7 +9,7 @@ var morgan = require('morgan');
 var connection   = require('./lib/dbconn');
 var LocalStrategy = require('passport-local').Strategy;
 var apiController = require("./controller/apiController");
-var homeController = require("./controller/homeController");
+// var homeController = require("./controller/homeController");
 
 var app = express();
 app.use(cookieParser());

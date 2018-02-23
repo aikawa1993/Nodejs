@@ -14,36 +14,22 @@ module.exports = function(app, passport, connection) {
 
     // used to deserialize the user
     passport.deserializeUser(function(userId, done) {
-
         request.query("select * from Users where Id='" + userId + "'",function(err,rows){
                 console.log('Query Success');
                 done(err, rows[0]);
         });
     });
 
-    passport.use('local-login', new LocalStrategy({
-            // by default, local strategy uses username and password, we will override with email
-            usernameField : 'Username',
-            passwordField : 'Password',
-            passReqToCallback : true // allows us to pass back the entire request to the callback
-        },
-        function(req, username, password, done) { // callback with email and password from our form
-                request.query("select * from Users where Username='" + Model.User({username: username}) +  "'",function(err,rows){
-                    if (err)
-                    return done(err);
-                if (!rows.length) {
-                    return done(null, false, req.flash('loginMessage', 'No user found.')); // req.flash is the way to set flashdata using connect-flash
-                }
-
-                // if the user is found but the password is wrong
-                if (!( rows[0].password == password))
-                    return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.')); // create the loginMessage and save it to session as flashdata
-
-                // all is well, return successful user
-                return done(null, rows[0]);
-                console.log('loged');
-            });
-        }));
+    passport.use('local-login',new LocalStrategy(
+        function(req, username, password, done) {
+            Model.findOne({ username: username }, function (err, user) {
+            if (err) { return done(err); }
+            if (!user) { return done(null, false); }
+            if (!user.verifyPassword(password)) { return done(null, false); }
+            return done(null, user);
+          });
+        }
+      ));
     // used to serialize the user for the session
     // =====================================
     // HOME PAGE (with login links) ========
@@ -79,6 +65,7 @@ module.exports = function(app, passport, connection) {
     });
 
     // app.post('/login', function(req, res){
+    //     console.log(passport.authenticate('local-login'));
     //     res.render('user.ejs');
     // })
 
