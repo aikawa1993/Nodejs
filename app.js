@@ -9,7 +9,7 @@ var morgan = require('morgan');
 var connection   = require('./lib/dbconn');
 var LocalStrategy = require('passport-local').Strategy;
 var apiController = require("./controller/apiController");
-// var homeController = require("./controller/homeController");
+var homeController = require("./controller/homeController");
 
 var app = express();
 app.use(cookieParser());
@@ -24,7 +24,10 @@ app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
 app.use(bodyParser()); // get information from html forms
 app.set('view engine', 'ejs'); // set up ejs for templating
-app.use(session({ secret: 'ilovescotchscotchyscotchscotch' })); // session secret
+app.use(session({ 
+    secret : "secret",
+    saveUninitialized: true,
+    resave: true })); // session secret
 app.use(flash()); // use connect-flash for flash messages stored in session
 
 app.use(passport.initialize()); // persistent login sessions
@@ -35,11 +38,13 @@ app.use("/assets",express.static(__dirname + "/public"));
 app.use("/allow",express.static(__dirname + "/css"));
 app.use("/bs",express.static(__dirname + "/bootstrap/css"));
 app.use("/hinh",express.static(__dirname + "/img"));
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.set("view engine","ejs");
   
-// apiController(app);
-// homeController(app);
+apiController(app);
+homeController(app);
 require('./routes.js')(app, passport, connection);
 
 app.listen(port, function(){

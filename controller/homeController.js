@@ -15,23 +15,19 @@ module.exports = function (app) {
     });
     // Get Method
     app.get("/",function(req, res){
-        // console.log("Cookies:",req.cookies);
-        // res.send(     
-        //     <link href="/assets/style.css" rel="stylesheet" type="text/css"/>
-        //     <h1>Hello Express!</h1>
-        //     <p>Request time : ${req.requestTime}</p>
-        //     <p>Name : ${req.cookies.username}</p>     
-        // );
         res.render("info");
     });
 
-    app.get("/user",function(req, res){
-        res.render("user");
+    app.get('/login', function(req, res) {
+        // render the page and pass in any flash data if it exists
+        res.render('login.ejs', { message: req.flash('loginMessage') });
     });
 
-    app.get("/login",function(req, res){
-        res.render("login");
-    })
+    app.get('/user', function(req, res) {
+        // render the page and pass in any flash data if it exists
+        res.render('user.ejs', { message: req.flash('loginMessage') });
+    });
+    
     // /user/123 | /users
     // res.render(tên page,{tham số})
     app.get("/index/:id", function(req,res){
@@ -39,27 +35,27 @@ module.exports = function (app) {
         // res.send(`<h1> User: ${sess.username}<\h1>`)
         res.render("index", {ID: req.params.id, queryString: req.query.qstr});
     });
-    app.get("/user", function(req, res){
-        console.log(sess.username);
-        res.render("user", { ID: sess.username });
-    });
+    // app.get("/user", function(req, res){
+    //     console.log(sess.username);
+    //     res.render("user", { ID: sess.username });
+    // });
     // Post Method
     
-    app.post("/login", urlencodedParser,function(req, res){
-        // res.send("Welcome," + req.body.username);
-        console.log(req.body.lg_username);
-        console.log(req.body.lg_password);
-        if(req.body.lg_username == "viet" && req.body.lg_password == "123")  { 
-            // sess = req.session;
-            // Save session username
-            // sess.username = req.body.lg_username;
-            //res.end('done');    
-            return res.redirect('/user');
-        }
-        else {
-            return res.redirect('/login');
-        }
-    });
+    // app.post("/login", urlencodedParser,function(req, res){
+    //     // res.send("Welcome," + req.body.username);
+    //     console.log(req.body.lg_username);
+    //     console.log(req.body.lg_password);
+    //     if(req.body.lg_username == "viet" && req.body.lg_password == "123")  { 
+    //         // sess = req.session;
+    //         // Save session username
+    //         // sess.username = req.body.lg_username;
+    //         //res.end('done');    
+    //         return res.redirect('/user');
+    //     }
+    //     else {
+    //         return res.redirect('/login');
+    //     }
+    // });
 
     app.post("/loginjson", jsonParser, function(req, res){
         // page success after login

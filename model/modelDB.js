@@ -10,15 +10,15 @@
 //    User: User
 // };
 
-var DB = require('/WebNodejs/lib/dbconn').DB;
+// var DB = require('/WebNodejs/lib/dbconn').DB;
 
-var sql = require('sql');
+// var sql = require('sql');
 
-var User = sql.define({
-   name: 'Users',
-   columns: ['id', 'username', 'password', 'createdAt', 'updatedAt']
-});
-module.exports = {
-   User: User
-};
+// var User = sql.define({
+//    name: 'Users',
+//    columns: ['id', 'username', 'password', 'createdAt', 'updatedAt']
+// });
+// module.exports = {
+//    User: User
+// };
 
