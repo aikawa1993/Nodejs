@@ -27,6 +27,12 @@ module.exports = function (app) {
         // render the page and pass in any flash data if it exists
         res.render('user.ejs', { message: req.flash('loginMessage') });
     });
+
+    app.get('/register', function(req, res) {
+        // render the page and pass in any flash data if it exists
+        res.render('register.ejs', { message: req.flash('loginMessage') });
+    });
+    
     
     // /user/123 | /users
     // res.render(tên page,{tham số})

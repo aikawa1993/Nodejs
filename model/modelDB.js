@@ -1,14 +1,14 @@
-// var database = require('/WebNodejs/lib/dbconn');
-// var Sequelize = require('sequelize');
+var database = require('/WebNodejs/lib/dbconn');
+var Sequelize = require('sequelize');
 
-// var User = database.define('user', {
-//     Username: Sequelize.STRING,
-//     Password: Sequelize.STRING
-// });
+var User = database.define('user', {
+    Username: Sequelize.STRING,
+    Password: Sequelize.STRING
+});
 
-// module.exports = {
-//    User: User
-// };
+module.exports = {
+   User: User
+};
 
 // var DB = require('/WebNodejs/lib/dbconn').DB;
 

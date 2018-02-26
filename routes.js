@@ -105,6 +105,15 @@ module.exports = function(app, passport, connection) {
     //         user : req.user // get the user out of session and pass to template
     //     });
     // });
+    
+    
+    // =====================================
+    // REGISTER ==============================
+    // =====================================
+    app.post('/register', function(req, res) {
+        console.log(req.body.username);
+        console.log(req.body.password);
+    });
 
     // =====================================
     // LOGOUT ==============================
@@ -113,6 +122,7 @@ module.exports = function(app, passport, connection) {
         req.logout();
         res.redirect('/');
     });
+    
 };
 
 // route middleware to make sure
