@@ -2,6 +2,8 @@ var LocalStrategy = require('passport-local').Strategy;
 var Connection = require('tedious').Connection;
 var Request = require('tedious').Request;
 var TYPES = require('tedious').TYPES;
+var bodyParser = require("body-parser");
+var jsonParser = bodyParser.json()
 var count;
 module.exports = function(app, passport, connection) {
      // =========================================================================
@@ -106,7 +108,6 @@ module.exports = function(app, passport, connection) {
     //     });
     // });
     
-    
     // =====================================
     // REGISTER ==============================
     // =====================================
@@ -128,8 +129,7 @@ module.exports = function(app, passport, connection) {
         //     firstName:"Viet",
         //     lastName:"Tran"
         // }));
-
-             var request = new Request(
+            var request = new Request(
                 "select * from Admin",
                 function(err, rowCount, rows) {
                     if (err) {
@@ -137,29 +137,38 @@ module.exports = function(app, passport, connection) {
                     } 
                     else {
                         console.log(rowCount + ' row(s) showed');
-                        count = rowCount;
-                        if(count > 0){
-                            return done(null,username);
-                        }
-                        return done(null, false);
                     }
                 });
-            request.addParameter('Acc', TYPES.NVarChar, username);
-            request.addParameter('Pass', TYPES.NVarChar, password);
+
+                var result = "";
+                var arr = [];
+                request.on('row', function(columns) {
+                    columns.forEach(function(column) {
+                        if (column.value === null) {
+                            console.log('NULL');
+                        } else {
+                            result += column.value + " ";
+                            // for(var i = 0 ; i < column.length ; i++ ){                              
+                            //     arr[i] = column[i].value
+                            // }
+                        }
+                    });
+                    console.log(result);
+                    // return(res.json({
+                    //     result
+                    // }));
+                });
+                
         
             // Execute SQL statement
             connection.execSql(request);
 
-            return(res.json({
-                firstName:"Viet",
-                lastName:"Tran"
-            }));
+          
       });
 };
 
 // route middleware to make sure
 function isLoggedIn(req, res, next) {
-
     // if user is authenticated in the session, carry on
     if (req.isAuthenticated())
         return next();
