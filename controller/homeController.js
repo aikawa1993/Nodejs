@@ -32,15 +32,25 @@ module.exports = function (app) {
         // render the page and pass in any flash data if it exists
         res.render('register.ejs', { message: req.flash('loginMessage') });
     });
-    
+
+    app.get('/listAdmin', function(req, res) {
+        // render the page and pass in any flash data if it exists
+        res.render('listAdmin.ejs', { message: req.flash('loginMessage') });
+    });
+
+    app.get('/listAdmin', function(req, res) {
+        // render the page and pass in any flash data if it exists
+        res.render('listAdmin.ejs', { message: req.flash('loginMessage') });
+    });
     
     // /user/123 | /users
     // res.render(tên page,{tham số})
-    app.get("/index/:id", function(req,res){
-        // res.cookie("username", req.params.id);
-        // res.send(`<h1> User: ${sess.username}<\h1>`)
-        res.render("index", {ID: req.params.id, queryString: req.query.qstr});
-    });
+
+    // app.post("/listAdminJson", jsonParser, function(req, res){
+    //     // page success after login
+    //     return(jsonParser);
+    // });
+   
     // app.get("/user", function(req, res){
     //     console.log(sess.username);
     //     res.render("user", { ID: sess.username });

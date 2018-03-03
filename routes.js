@@ -123,6 +123,38 @@ module.exports = function(app, passport, connection) {
         res.redirect('/');
     });
     
+    app.get('/listAdminJson', jsonParser, function(req, res){       
+        // return(res.json({
+        //     firstName:"Viet",
+        //     lastName:"Tran"
+        // }));
+
+             var request = new Request(
+                "select * from Admin",
+                function(err, rowCount, rows) {
+                    if (err) {
+                        console.log(err);
+                    } 
+                    else {
+                        console.log(rowCount + ' row(s) showed');
+                        count = rowCount;
+                        if(count > 0){
+                            return done(null,username);
+                        }
+                        return done(null, false);
+                    }
+                });
+            request.addParameter('Acc', TYPES.NVarChar, username);
+            request.addParameter('Pass', TYPES.NVarChar, password);
+        
+            // Execute SQL statement
+            connection.execSql(request);
+
+            return(res.json({
+                firstName:"Viet",
+                lastName:"Tran"
+            }));
+      });
 };
 
 // route middleware to make sure

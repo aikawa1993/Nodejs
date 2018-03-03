@@ -37,7 +37,7 @@ app.use(passport.session()); // use connect-flash for flash messages stored in s
 app.use("/assets",express.static(__dirname + "/public"));
 app.use("/allow",express.static(__dirname + "/css"));
 app.use("/bs",express.static(__dirname + "/bootstrap/css"));
-app.use("/hinh",express.static(__dirname + "/img"));
+app.use("/jq",express.static(__dirname + "/Jquery"));
 app.use(passport.initialize());
 app.use(passport.session());
 
